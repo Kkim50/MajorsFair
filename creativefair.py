@@ -11,7 +11,6 @@ creative_list = ["art", "consumer", "dance", "enterainment", "media", "furnishin
 
 #Dictionary map names to majors
 names_to_major_dict = {}
-
 responses = xl.parse("Creative")
 
 #Get every zoom link, match it to the majors 
