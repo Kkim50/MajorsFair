@@ -1,4 +1,5 @@
 {
+  "homepage": "http://kimkat.dev/majors-fair/",
   "name": "majors-react-app",
   "version": "0.1.0",
   "private": true,
@@ -9,8 +10,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
-    "web-vitals": "^0.2.4",
-    "homepage": "http://kimkat.dev/majors-fair"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
