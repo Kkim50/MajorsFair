@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/majors-fair/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/majors-fair/static/js/main.b1a31ec5.chunk.js",
-    "main.js.map": "/majors-fair/static/js/main.b1a31ec5.chunk.js.map",
-    "runtime-main.js": "/majors-fair/static/js/runtime-main.2aea66e2.js",
-    "runtime-main.js.map": "/majors-fair/static/js/runtime-main.2aea66e2.js.map",
-    "static/js/2.2b0f3bd9.chunk.js": "/majors-fair/static/js/2.2b0f3bd9.chunk.js",
-    "static/js/2.2b0f3bd9.chunk.js.map": "/majors-fair/static/js/2.2b0f3bd9.chunk.js.map",
-    "static/js/3.0e74a82d.chunk.js": "/majors-fair/static/js/3.0e74a82d.chunk.js",
-    "static/js/3.0e74a82d.chunk.js.map": "/majors-fair/static/js/3.0e74a82d.chunk.js.map",
-    "index.html": "/majors-fair/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/majors-fair/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.2b0f3bd9.chunk.js.LICENSE.txt": "/majors-fair/static/js/2.2b0f3bd9.chunk.js.LICENSE.txt",
-    "static/media/logo.103b5fa1.svg": "/majors-fair/static/media/logo.103b5fa1.svg"
+    "main.css": "/majors-fair/majors-fair.md/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/majors-fair/majors-fair.md/static/js/main.b1a31ec5.chunk.js",
+    "main.js.map": "/majors-fair/majors-fair.md/static/js/main.b1a31ec5.chunk.js.map",
+    "runtime-main.js": "/majors-fair/majors-fair.md/static/js/runtime-main.b58bbbc2.js",
+    "runtime-main.js.map": "/majors-fair/majors-fair.md/static/js/runtime-main.b58bbbc2.js.map",
+    "static/js/2.2b0f3bd9.chunk.js": "/majors-fair/majors-fair.md/static/js/2.2b0f3bd9.chunk.js",
+    "static/js/2.2b0f3bd9.chunk.js.map": "/majors-fair/majors-fair.md/static/js/2.2b0f3bd9.chunk.js.map",
+    "static/js/3.0e74a82d.chunk.js": "/majors-fair/majors-fair.md/static/js/3.0e74a82d.chunk.js",
+    "static/js/3.0e74a82d.chunk.js.map": "/majors-fair/majors-fair.md/static/js/3.0e74a82d.chunk.js.map",
+    "index.html": "/majors-fair/majors-fair.md/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/majors-fair/majors-fair.md/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.2b0f3bd9.chunk.js.LICENSE.txt": "/majors-fair/majors-fair.md/static/js/2.2b0f3bd9.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/majors-fair/majors-fair.md/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2aea66e2.js",
+    "static/js/runtime-main.b58bbbc2.js",
     "static/js/2.2b0f3bd9.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
     "static/js/main.b1a31ec5.chunk.js"
