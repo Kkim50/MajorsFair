@@ -1,7 +1,7 @@
 import pandas as pd
 import tabula
 import os
-
+import re
 from difflib import SequenceMatcher
 
 
@@ -16,9 +16,8 @@ def similar(a, b):
 
 
 def find_best_match(majors, category_list, category_names, bad_words):
-    
     matches = {'Creative': [], 'Life': [], 'Leadership': [],
-             'Service': [], 'Technology': [], 'Culture': [], 'Nature': []}
+               'Service': [], 'Technology': [], 'Culture': [], 'Nature': []}
     # Find the best matching category
     for item in majors:  # For each major in the excel row
         item = item.strip()
@@ -57,9 +56,9 @@ culture_list = list(df["Culture"].dropna())
 nature_list = list(df["Nature"].dropna())
 # all_lists = creative_list + leadership_list + life_list + service_list + tech_list + culture_list + nature_list
 category_list = [creative_list, life_list, leadership_list,
-                    service_list, tech_list, culture_list, nature_list]
+                 service_list, tech_list, culture_list, nature_list]
 category_names = ['Creative', 'Life', 'Leadership',
-                'Service', 'Technology', 'Culture', 'Nature']
+                  'Service', 'Technology', 'Culture', 'Nature']
 bad_names = ['nan']
 
 # read the majors fair excel file
@@ -79,14 +78,17 @@ responses = xl.parse("Form Responses 1")
 
 # Get every zoom link, match it to the majors
 for row in responses.iterrows():
-    majors = str(row[1][4]).split(",") + str(row[1][5]).split(",")
-    minors = str(row[1][6]).split(",") + str(row[1][7]).split(",")
-    certificates = str(row[1][8]).split(",") + str(row[1][9]).split(",")
+    majors = re.split("[;/,]",str(row[1][4])) + re.split("[;/,]", str(row[1][5]))
+    minors = re.split("[;/,]",str(row[1][6])) + re.split("[;/,]",str(row[1][7]))
+    certificates = re.split("[;/,]",str(row[1][8])) + re.split("[;/,]",str(row[1][9]))
 
     # Method that takes in major/minor/category and then returns the best match, then appends value to dictionary key[name]
-    names_to_major_dict[str(row[1][1])] = find_best_match(majors, category_list, category_names, bad_names)
-    names_to_minor_dict[str(row[1][1])] = find_best_match(minors, category_list, category_names, bad_names)
-    names_to_cat_dict[str(row[1][1])] = find_best_match(certificates, category_list, category_names, bad_names)
+    names_to_major_dict[str(row[1][1])] = find_best_match(
+        majors, category_list, category_names, bad_names)
+    names_to_minor_dict[str(row[1][1])] = find_best_match(
+        minors, category_list, category_names, bad_names)
+    names_to_cat_dict[str(row[1][1])] = find_best_match(
+        certificates, category_list, category_names, bad_names)
 
 # go through all the xl sheets and pull the zoom links, match them to the correct person
 for sheet in xl.sheet_names:
@@ -104,10 +106,6 @@ for key in sorted(names_to_major_dict.keys()):
         #     col = 'Majors: ' + ', '.join(names_to_major_dict[key]) + ', minors: '
         # creative = names_to_major_dict[key]['Creative'] + names_to_minor_dict[key]['Creative']
         # print(names_to_major_dict[key])
-
-        print()
-
-
         organized_dict[key + ' - Majors'] = [names_to_zoom_dict[key],
                                              *[sorted(items) for items in names_to_major_dict[key].values()]]
         organized_dict[key + ' - Minors'] = ['',
@@ -116,11 +114,11 @@ for key in sorted(names_to_major_dict.keys()):
                                                    *[sorted(items) for items in names_to_cat_dict[key].values()]]
 
 organized_df = pd.DataFrame.from_dict(organized_dict, orient="index")
-organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "Life", 3:"Leadership", 4:"Service", 5:"Technology",6:"Culture", 7:"Nature"})
+organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "Life",
+                                            3: "Leadership", 4: "Service", 5: "Technology", 6: "Culture", 7: "Nature"})
 print(organized_df)
 organized_df.to_csv(r'./Organized_MasterList.csv')
-
-#organized_df.to_excel(r'./Organized_MasterList.xlsx')
+organized_df.to_excel(r'./Organized_MasterList.xlsx')
 
 # for word in major.split('-')[0].strip().split(' '):  # Take all the words before the dash -
 #     if word in bad_words: break  # Skip if bad word
