@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/kkim50.github.io/MajorsFair/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/kkim50.github.io/MajorsFair/static/js/main.b1a31ec5.chunk.js",
-    "main.js.map": "/kkim50.github.io/MajorsFair/static/js/main.b1a31ec5.chunk.js.map",
-    "runtime-main.js": "/kkim50.github.io/MajorsFair/static/js/runtime-main.ed760a16.js",
-    "runtime-main.js.map": "/kkim50.github.io/MajorsFair/static/js/runtime-main.ed760a16.js.map",
-    "static/js/2.2b0f3bd9.chunk.js": "/kkim50.github.io/MajorsFair/static/js/2.2b0f3bd9.chunk.js",
-    "static/js/2.2b0f3bd9.chunk.js.map": "/kkim50.github.io/MajorsFair/static/js/2.2b0f3bd9.chunk.js.map",
-    "static/js/3.0e74a82d.chunk.js": "/kkim50.github.io/MajorsFair/static/js/3.0e74a82d.chunk.js",
-    "static/js/3.0e74a82d.chunk.js.map": "/kkim50.github.io/MajorsFair/static/js/3.0e74a82d.chunk.js.map",
-    "index.html": "/kkim50.github.io/MajorsFair/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/kkim50.github.io/MajorsFair/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.2b0f3bd9.chunk.js.LICENSE.txt": "/kkim50.github.io/MajorsFair/static/js/2.2b0f3bd9.chunk.js.LICENSE.txt",
-    "static/media/logo.103b5fa1.svg": "/kkim50.github.io/MajorsFair/static/media/logo.103b5fa1.svg"
+    "main.css": "/majors-fair/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/majors-fair/static/js/main.b1a31ec5.chunk.js",
+    "main.js.map": "/majors-fair/static/js/main.b1a31ec5.chunk.js.map",
+    "runtime-main.js": "/majors-fair/static/js/runtime-main.2aea66e2.js",
+    "runtime-main.js.map": "/majors-fair/static/js/runtime-main.2aea66e2.js.map",
+    "static/js/2.2b0f3bd9.chunk.js": "/majors-fair/static/js/2.2b0f3bd9.chunk.js",
+    "static/js/2.2b0f3bd9.chunk.js.map": "/majors-fair/static/js/2.2b0f3bd9.chunk.js.map",
+    "static/js/3.0e74a82d.chunk.js": "/majors-fair/static/js/3.0e74a82d.chunk.js",
+    "static/js/3.0e74a82d.chunk.js.map": "/majors-fair/static/js/3.0e74a82d.chunk.js.map",
+    "index.html": "/majors-fair/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/majors-fair/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.2b0f3bd9.chunk.js.LICENSE.txt": "/majors-fair/static/js/2.2b0f3bd9.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/majors-fair/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.ed760a16.js",
+    "static/js/runtime-main.2aea66e2.js",
     "static/js/2.2b0f3bd9.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
     "static/js/main.b1a31ec5.chunk.js"
