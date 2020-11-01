@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Table from 'react-bootstrap/Table';
+// import Table from 'react-bootstrap/Table';
 
 class Majors extends React.Component {
   constructor(props) {
@@ -54,25 +54,25 @@ class Majors extends React.Component {
         var dawgs = person_data["Double Dawgs \/ Double Majors"];
 
         majors_data.push(
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Major</th>
-                <th>Meeting Room</th>
-                <th>Minor</th>
-                <th>Certificate</th>
-                <th>Double Dawgs/Dual Degree</th>
-                </tr> </thead>
-        <tbody>
-        <tr>
-        <td>{majors}</td>
-        <td><a href={links}><span>{links}</span></a></td>
-        <td>{minors}</td>
-        <td><span>{cats}</span></td>
-        <td>{dawgs}</td>
-        </tr>
-        </tbody>
-        </Table>
+        //   <Table striped bordered hover>
+        //     <thead>
+        //       <tr>
+        //         <th>Major</th>
+        //         <th>Meeting Room</th>
+        //         <th>Minor</th>
+        //         <th>Certificate</th>
+        //         <th>Double Dawgs/Dual Degree</th>
+        //         </tr> </thead>
+        // <tbody>
+        // <tr>
+        // <td>{majors}</td>
+        // <td><a href={links}><span>{links}</span></a></td>
+        // <td>{minors}</td>
+        // <td><span>{cats}</span></td>
+        // <td>{dawgs}</td>
+        // </tr>
+        // </tbody>
+        // </Table>
         );
       }
     }
