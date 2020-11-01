@@ -65,7 +65,6 @@ names_to_zoom_dict = {}
 names_to_minor_dict = {}
 names_to_cat_dict = {}
 names_to_doubledawgs_dict = {}
-organized_dict = {}
 responses = xl.parse("Form Responses 1")
 # responses = responses.fillna(" ")
 
@@ -124,32 +123,39 @@ for sheet in xl.sheet_names:
             if name not in names_to_zoom:
                 names_to_zoom[name] = ['' for _ in range(len(category_names))]
             names_to_zoom[name][category_to_inds[str(sheet)]] = link
-            # names_to_zoom[name].append(link)
-            # zoom_arr.append(str(row[1][0]) + " [ " + str(sheet) + " ] ") #appends zooms to array
-            # names_to_zoom_dict[row[1][2]] = zoom_arr #connects key(name) to value(zoom links array)
-#this should work across sheets, so why does it keep getting overridden?
 
-for key in sorted(names_to_major_dict.keys()):
-    if key in names_to_zoom.keys():
-        organized_dict[key + ' - Zoom Link'] = [*names_to_zoom[key]]
-        organized_dict[key + ' - Majors'] = [*[sorted(items) for items in names_to_major_dict[key].values()]]
-        # print(organized_dict[key + ' - Majors'])
-        organized_dict[key + ' - Minors'] = [*[sorted(items) for items in names_to_minor_dict[key].values()]]
-        #figure out a way to append all the certificates to the same major/minor
-        #and zoom link
-        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key] for _ in range(len(category_names))]
-        # print(organized_dict[key + ' - Certificates'])
-        # exit()
-        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key] for _ in range(len(category_names))]
+# Sort the majors for each person, preserves the order of the categories
+for name in names_to_major_dict.keys():
+    names_to_major_dict[name] = [sorted(vals) for vals in names_to_major_dict[name].values()]
+
+# Sort the minors for each person, preserves the order of the categories
+for name in names_to_minor_dict.keys():
+    names_to_minor_dict[name] = [sorted(vals) for vals in names_to_minor_dict[name].values()]
+
+organized_dict = {}
+for category in category_names:
+    category_ind = category_to_inds[category]
+    organized_dict[category] = {}
+    for person in sorted(names_to_major_dict.keys()):
+        if person not in names_to_zoom.keys():
+            continue
+        person_info = {}
+        person_info['Zoom Link'] = names_to_zoom[person][category_ind]
+        person_info['Majors'] = names_to_major_dict[person][category_ind]
+        person_info['Minors'] = names_to_minor_dict[person][category_ind]
+        person_info['Certificates'] = names_to_cat_dict[person]
+        person_info['Double Dawgs / Double Majors'] = names_to_doubledawgs_dict[person]
+        organized_dict[category][person] = person_info
+
 # print(organized_dict)
-organized_df = pd.DataFrame.from_dict(organized_dict, orient="index")
+organized_df = pd.DataFrame.from_dict(organized_dict)
 organized_df = organized_df.rename(columns=inds_to_category)
 # print(organized_dict)
 # organized_df.to_csv(r'Organized_MasterList.csv')
 
 # df = organized_df.to_json(orient='columns', default_handler=blank)
 # print(df)
-jsonfiles = json.loads(organized_df.to_json(orient='columns'))
+jsonfiles = json.loads(organized_df.to_json())
 # print(jsonfiles)
 organized_df.to_json(r'Organized_MasterList.json')
 organized_df.to_excel(r'Organized_MasterList.xlsx')

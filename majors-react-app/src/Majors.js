@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Table from 'react-bootstrap/Table';
 
 class Majors extends React.Component {
   constructor(props) {
@@ -41,40 +42,38 @@ class Majors extends React.Component {
     const post = this.state.post;
     const value = this.state.value;
     var category = null;
-    var links = null;
     var majors_data = [];
     if (this.state.gotmajors_flag) {
       category = post[value];
-      links = post["Zoom Links"];
-      var person;
-      for (person in category) {
-        if (links[person].includes(category)) {
-          links = post["Zoom Links"];
-        }
-        if (person.includes(" - Certificates")) {
-          if (links[person].length > 0) {
-            majors_data.push(
-              <div>
-                {person} : {links[person]}
-              </div>
-            );
-          }
-        }
-        if (person.includes(" - Double Dawgs")) {
-          if (links[person].length > 0) {
-            majors_data.push(
-              <div>
-                {person} : {links[person]}
-              </div>
-            );
-          }
-        } else if (category[person].length > 0) {
-          majors_data.push(
-            <div>
-              {person} : {category[person]} : {links[person]}
-            </div>
-          );
-        }
+      for (var person in category) {
+        var person_data = category[person]
+        var links = person_data['Zoom Link'];
+        var majors = person_data["Majors"];
+        var minors = person_data["Minors"];
+        var cats = person_data["Certificates"];
+        var dawgs = person_data["Double Dawgs \/ Double Majors"];
+
+        majors_data.push(
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Major</th>
+                <th>Meeting Room</th>
+                <th>Minor</th>
+                <th>Certificate</th>
+                <th>Double Dawgs/Dual Degree</th>
+                </tr> </thead>
+        <tbody>
+        <tr>
+        <td>{majors}</td>
+        <td><a href={links}><span>{links}</span></a></td>
+        <td>{minors}</td>
+        <td><span>{cats}</span></td>
+        <td>{dawgs}</td>
+        </tr>
+        </tbody>
+        </Table>
+        );
       }
     }
 
