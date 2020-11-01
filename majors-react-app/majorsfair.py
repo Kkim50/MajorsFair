@@ -54,6 +54,8 @@ category_list = [creative_list, life_list, leadership_list,
                  service_list, tech_list, culture_list, nature_list]
 category_names = ['Creative', 'Life', 'Leadership',
                   'Service', 'Technology', 'Culture', 'Nature']
+category_to_inds = {'Creative': 0, 'Life': 1, 'Leadership': 2, 'Service': 3, 'Technology': 4, 'Culture': 5, 'Nature': 6}
+inds_to_category = {value: key for key, value in category_to_inds.items()}
 bad_names = ['nan']
 # iterate over the sheet_names
 # pull the data that matches name, append to the dictionary
@@ -120,29 +122,28 @@ for sheet in xl.sheet_names:
             name = str(row[1][2])
             link = str(row[1][0])
             if name not in names_to_zoom:
-                names_to_zoom[name] = []
-            names_to_zoom[name].append(link + " [ " + str(sheet) + " ] ")
+                names_to_zoom[name] = ['' for _ in range(len(category_names))]
+            names_to_zoom[name][category_to_inds[str(sheet)]] = link
+            # names_to_zoom[name].append(link)
             # zoom_arr.append(str(row[1][0]) + " [ " + str(sheet) + " ] ") #appends zooms to array
             # names_to_zoom_dict[row[1][2]] = zoom_arr #connects key(name) to value(zoom links array)
-print(names_to_zoom)
 #this should work across sheets, so why does it keep getting overridden?
 
 for key in sorted(names_to_major_dict.keys()):
-    if key in names_to_zoom_dict.keys():
-        organized_dict[key + ' - Majors'] = [names_to_zoom_dict[key],
-                                             *[sorted(items) for items in names_to_major_dict[key].values()]]
+    if key in names_to_zoom.keys():
+        organized_dict[key + ' - Zoom Link'] = [*names_to_zoom[key]]
+        organized_dict[key + ' - Majors'] = [*[sorted(items) for items in names_to_major_dict[key].values()]]
         # print(organized_dict[key + ' - Majors'])
-        organized_dict[key + ' - Minors'] = ['', *[sorted(items) for items in names_to_minor_dict[key].values()]]
+        organized_dict[key + ' - Minors'] = [*[sorted(items) for items in names_to_minor_dict[key].values()]]
         #figure out a way to append all the certificates to the same major/minor
         #and zoom link
-        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key]] + [[] for _ in range(len(category_names))]
+        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key] for _ in range(len(category_names))]
         # print(organized_dict[key + ' - Certificates'])
         # exit()
-        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key]] + [[] for _ in range(len(category_names))]
+        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key] for _ in range(len(category_names))]
 # print(organized_dict)
 organized_df = pd.DataFrame.from_dict(organized_dict, orient="index")
-organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "Life",
-                                            3: "Leadership", 4: "Service", 5: "Technology", 6: "Culture", 7: "Nature"})
+organized_df = organized_df.rename(columns=inds_to_category)
 # print(organized_dict)
 # organized_df.to_csv(r'Organized_MasterList.csv')
 
