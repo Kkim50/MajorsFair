@@ -6,7 +6,7 @@ class Majors extends React.Component {
     this.state = {
       value: "N/A",
       post: null,
-      gotmajors_flag: false
+      gotmajors_flag: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -33,8 +33,8 @@ class Majors extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ post: data });
-        this.setState({gotmajors_flag: true});
-      })
+        this.setState({ gotmajors_flag: true });
+      });
   }
 
   render() {
@@ -44,20 +44,40 @@ class Majors extends React.Component {
     var links = null;
     var majors_data = [];
     if (this.state.gotmajors_flag) {
-      links = post["Zoom Links"];
       category = post[value];
+      links = post["Zoom Links"];
       var person;
       for (person in category) {
-        if (person.includes(' - Certificates')) {
+        if (links[person].includes(category)) {
+          links = post["Zoom Links"];
+        }
+        if (person.includes(" - Certificates")) {
           if (links[person].length > 0) {
-            majors_data.push(<div>{person} : {links[person]}</div>);
+            majors_data.push(
+              <div>
+                {person} : {links[person]}
+              </div>
+            );
+          }
+        }
+        if (person.includes(" - Double Dawgs")) {
+          if (links[person].length > 0) {
+            majors_data.push(
+              <div>
+                {person} : {links[person]}
+              </div>
+            );
           }
         } else if (category[person].length > 0) {
-          majors_data.push(<div>{person} : {category[person]} : {links[person]}</div>);
+          majors_data.push(
+            <div>
+              {person} : {category[person]} : {links[person]}
+            </div>
+          );
         }
       }
     }
-    
+
     return (
       <div>
         <form action="" onSubmit={this.handleSubmit}>
@@ -76,7 +96,9 @@ class Majors extends React.Component {
             <option value="Nature">Nature</option>
             <option value="Technology">Technology</option>
             <option value="Leadership">Leadership</option>
-            <option value="DoubleDawgs">DoubleDawgs, FinAid, Grad School</option>
+            <option value="DoubleDawgs">
+              DoubleDawgs, FinAid, Grad School
+            </option>
             <option value="Service">Service</option>
           </select>
           <input type="submit" value="Submit" />

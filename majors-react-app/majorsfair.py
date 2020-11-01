@@ -105,17 +105,27 @@ for row in responses.iterrows():
     names_to_cat_dict[str(row[1][1])] = certificates
     names_to_doubledawgs_dict[str(row[1][1])] = doubledawgs
 
+names_to_zoom = {}
 # go through all the xl sheets and pull the zoom links, match them to the correct person
 for sheet in xl.sheet_names:
     if sheet == "Form Responses 1" or sheet == "Other":
         continue
     responses = xl.parse(sheet)
+    # zoom_arr = []
     for row in responses.iterrows():
+        # zoom_arr=[] #makes an empty array
         if(str(row[1][0])) == "nan":
             continue
         else:
-            names_to_zoom_dict[row[1][2]] = str(
-            row[1][0]) + " [ " + str(sheet) + " ] "
+            name = str(row[1][2])
+            link = str(row[1][0])
+            if name not in names_to_zoom:
+                names_to_zoom[name] = []
+            names_to_zoom[name].append(link + " [ " + str(sheet) + " ] ")
+            # zoom_arr.append(str(row[1][0]) + " [ " + str(sheet) + " ] ") #appends zooms to array
+            # names_to_zoom_dict[row[1][2]] = zoom_arr #connects key(name) to value(zoom links array)
+print(names_to_zoom)
+#this should work across sheets, so why does it keep getting overridden?
 
 for key in sorted(names_to_major_dict.keys()):
     if key in names_to_zoom_dict.keys():
