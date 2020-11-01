@@ -26,13 +26,14 @@ for keys in all_dict.keys():
 
 # list out all the dictionary stuff
 
-
 @app.route('/api/', methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def api_post():
     if (request.method == 'POST'):
-        print(request.get_data())
-        return "POST SUCCESS"
+        print(request.get_json())
+        #majorsfair.jsonfiles
+        # return "hello"
+        return majorsfair.jsonfiles
     else:
-        return "FAILED"
+        return "Hello!"
 

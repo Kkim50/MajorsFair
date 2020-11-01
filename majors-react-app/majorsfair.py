@@ -2,6 +2,7 @@ import pandas as pd
 import tabula
 import os
 import re
+import json
 from difflib import SequenceMatcher
 
 
@@ -111,6 +112,7 @@ organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "
                                             3: "Leadership", 4: "Service", 5: "Technology", 6: "Culture", 7: "Nature"})
 
 organized_df.to_csv(r'Organized_MasterList.csv')
+jsonfiles = json.loads(organized_df.to_json(orient='index'))
 organized_df.to_excel(r'Organized_MasterList.xlsx')
 
 # for word in major.split('-')[0].strip().split(' '):  # Take all the words before the dash -
