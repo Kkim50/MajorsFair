@@ -77,14 +77,23 @@ for row in responses.iterrows():
         re.split("[,]", str(row[1][9]))
     good_certs = []
     for cert in certificates:
-        if cert != 'nan':
+        if cert is None or cert == 'nan':
+            continue
+            # good_certs.append("")
+        else:
             good_certs.append(cert)
+
     doubledawgs = re.split("[,]", str(row[1][10])) + \
         re.split("[,]", str(row[1][11]))
     good_dawgs = []
+
     for dawg in doubledawgs:
-        if dawg != 'nan':
+        if dawg is None or dawg == 'nan':
+            continue
+            # good_dawgs.append("")
+        else:
             good_dawgs.append(dawg)
+        
     certificates = good_certs
     doubledawgs = good_dawgs
 
@@ -112,17 +121,25 @@ for key in sorted(names_to_major_dict.keys()):
     if key in names_to_zoom_dict.keys():
         organized_dict[key + ' - Majors'] = [names_to_zoom_dict[key],
                                              *[sorted(items) for items in names_to_major_dict[key].values()]]
+        # print(organized_dict[key + ' - Majors'])
         organized_dict[key + ' - Minors'] = ['', *[sorted(items) for items in names_to_minor_dict[key].values()]]
         #figure out a way to append all the certificates to the same major/minor
         #and zoom link
-        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key]]
-        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key]]
-
+        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key]] + [[] for _ in range(len(category_names))]
+        # print(organized_dict[key + ' - Certificates'])
+        # exit()
+        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key]] + [[] for _ in range(len(category_names))]
+# print(organized_dict)
 organized_df = pd.DataFrame.from_dict(organized_dict, orient="index")
 organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "Life",
                                             3: "Leadership", 4: "Service", 5: "Technology", 6: "Culture", 7: "Nature"})
-organized_df.to_csv(r'Organized_MasterList.csv')
+# print(organized_dict)
+# organized_df.to_csv(r'Organized_MasterList.csv')
+
+# df = organized_df.to_json(orient='columns', default_handler=blank)
+# print(df)
 jsonfiles = json.loads(organized_df.to_json(orient='columns'))
+# print(jsonfiles)
 organized_df.to_json(r'Organized_MasterList.json')
 organized_df.to_excel(r'Organized_MasterList.xlsx')
 

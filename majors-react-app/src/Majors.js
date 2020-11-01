@@ -48,7 +48,11 @@ class Majors extends React.Component {
       category = post[value];
       var person;
       for (person in category) {
-        if (category[person].length > 0) {
+        if (person.includes(' - Certificates')) {
+          if (links[person].length > 0) {
+            majors_data.push(<div>{person} : {links[person]}</div>);
+          }
+        } else if (category[person].length > 0) {
           majors_data.push(<div>{person} : {category[person]} : {links[person]}</div>);
         }
       }
