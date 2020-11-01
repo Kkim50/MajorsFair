@@ -65,6 +65,7 @@ names_to_cat_dict = {}
 names_to_doubledawgs_dict = {}
 organized_dict = {}
 responses = xl.parse("Form Responses 1")
+# responses = responses.fillna(" ")
 
 # Get every zoom link, match it to the majors
 for row in responses.iterrows():
@@ -74,8 +75,18 @@ for row in responses.iterrows():
         re.split("[;/,]", str(row[1][7]))
     certificates = re.split("[,]", str(row[1][8])) + \
         re.split("[,]", str(row[1][9]))
+    good_certs = []
+    for cert in certificates:
+        if cert != 'nan':
+            good_certs.append(cert)
     doubledawgs = re.split("[,]", str(row[1][10])) + \
         re.split("[,]", str(row[1][11]))
+    good_dawgs = []
+    for dawg in doubledawgs:
+        if dawg != 'nan':
+            good_dawgs.append(dawg)
+    certificates = good_certs
+    doubledawgs = good_dawgs
 
     # Method that takes in major/minor/category and then returns the best match, then appends value to dictionary key[name]
     names_to_major_dict[str(row[1][1])] = find_best_match(
@@ -104,17 +115,15 @@ for key in sorted(names_to_major_dict.keys()):
         organized_dict[key + ' - Minors'] = ['', *[sorted(items) for items in names_to_minor_dict[key].values()]]
         #figure out a way to append all the certificates to the same major/minor
         #and zoom link
-        organized_dict[key + ' - Certificates'] = [names_to_cat_dict.get(key)]
-        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict.get(key)]
+        organized_dict[key + ' - Certificates'] = [names_to_cat_dict[key]]
+        organized_dict[key + ' - Double Dawgs / Double Majors'] = [names_to_doubledawgs_dict[key]]
 
 organized_df = pd.DataFrame.from_dict(organized_dict, orient="index")
 organized_df = organized_df.rename(columns={0: "Zoom Links", 1: "Creative", 2: "Life",
                                             3: "Leadership", 4: "Service", 5: "Technology", 6: "Culture", 7: "Nature"})
-
 organized_df.to_csv(r'Organized_MasterList.csv')
-reorganized_df = organized_df.dropna()
-jsonfiles = json.loads(reorganized_df.to_json(orient='columns'))
-reorganized_df.to_json(r'Organized_MasterList.json')
+jsonfiles = json.loads(organized_df.to_json(orient='columns'))
+organized_df.to_json(r'Organized_MasterList.json')
 organized_df.to_excel(r'Organized_MasterList.xlsx')
 
 # for word in major.split('-')[0].strip().split(' '):  # Take all the words before the dash -
