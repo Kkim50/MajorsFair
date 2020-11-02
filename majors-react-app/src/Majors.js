@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 import "fontsource-roboto";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,14 +11,12 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from '@material-ui/core/NativeSelect';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-
+import NativeSelect from "@material-ui/core/NativeSelect";
+import Container from "@material-ui/core/Container";
+import { DropzoneAreaBase } from "material-ui-dropzone";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -58,9 +56,12 @@ class Majors extends React.Component {
       value: "N/A",
       post: null,
       gotmajors_flag: false,
+      open: false,
+      given_file: "aaaa",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
 
   handleChange(event) {
@@ -77,6 +78,7 @@ class Majors extends React.Component {
       },
       body: JSON.stringify({
         value: this.state.value,
+        file: this.state.post,
       }),
     })
       //issue request from fromtend to backend
@@ -84,6 +86,25 @@ class Majors extends React.Component {
       .then((data) => {
         this.setState({ post: data });
         this.setState({ gotmajors_flag: true });
+      });
+  }
+
+  handleUpload(fileObj) {
+    console.log("Uploading");
+    // data.append("name", event.target.fil);
+    console.log(JSON.stringify(fileObj));
+
+    fetch("/api/upload/", {
+      method: "POST",
+      headers: {
+        "Content-type": "multipart/form-data",
+      },
+      body: fileObj,
+    })
+      //issue request from fromtend to backend
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ post: data });
       });
   }
 
@@ -117,42 +138,56 @@ class Majors extends React.Component {
     }
 
     return (
-<Container maxWidth="lg" justify="center">
+      <Container maxWidth="lg" justify="center">
         <Card>
           <CardContent>
-          <Grid container justify="center" spacing="1">
-          <Grid item xs={4}>
-              <Typography variant="h5" gutterBottom>
-              Majors Fair Excel Data Parser
-            </Typography>
-            </Grid>
-          <Grid item xs={4}>
-
-            <FormControl variant="outlined" variant="outlined" action="">
-              <NativeSelect
-                multiple={false}
-                value={this.state.value}
-                onChange={this.handleChange}
-                onClick={(e) => this.handleSubmit(e)}
+            <div align="center">
+              <Typography variant="h3">
+                Majors Fair Excel Data Parser
+              </Typography>
+              <Typography variant="caption">
+                Note: The uploading is still a work in progress and isn't implemented.
+                The table populates correctly but may need to be double-checked for accuracy.
+                </Typography>
+{/* 
+              <Typography variant="h6">Upload file:</Typography>
+              <DropzoneAreaBase height="10%"
+                acceptedFiles={[".xlsx"]}
+                filesLimit={1}
+                enctype="multipart/form-data"
+                dropzoneText="Drop your Excel file here"
+                onAdd={(fileobj) => {
+                  console.log("onAdd", fileobj);
+                  this.handleUpload(fileobj);
+                }}
               >
-                <option selected value="all">
-                  All
-                </option>
-                <option value="Creative">Creative</option>
-                <option value="Culture">Culture</option>
-                <option value="Life">Life</option>
-                <option value="Nature">Nature</option>
-                <option value="Technology">Technology</option>
-                <option value="Leadership">Leadership</option>
-                <option value="DoubleDawgs">
-                  DoubleDawgs, FinAid, Grad School
-                </option>
-                <option value="Service">Service</option>
-              </NativeSelect>
-              <FormHelperText style={{justifyContent:'left'}} htmlFor="age-native-helper">Please select a category</FormHelperText>
-            </FormControl>
-            </Grid>
-            </Grid>
+              </DropzoneAreaBase> */}
+              </div>
+              <div align="center">
+
+              <FormControl variant="outlined" action="">
+                <NativeSelect
+                  multiple={false}
+                  value={this.state.value}
+                  onChange={this.handleSubmit}
+                >
+                  <option selected value="Creative">Creative</option>
+                  <option value="Culture">Culture</option>
+                  <option value="Life">Life</option>
+                  <option value="Nature">Nature</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Leadership">Leadership</option>
+                  <option value="DoubleDawgs">
+                    DoubleDawgs, FinAid, Grad School
+                  </option>
+                  <option value="Service">Service</option>
+                </NativeSelect>
+                <FormHelperText htmlFor="age-native-helper">
+                  Please select a category
+                </FormHelperText>
+              </FormControl>
+              </div>
+
             <TableContainer component={Paper}>
               <Table
                 stickyHeader
@@ -162,12 +197,12 @@ class Majors extends React.Component {
               >
                 <TableHead>
                   <TableRow>
-                  <StyledTableCell align="center">Name</StyledTableCell>
+                    <StyledTableCell align="center">Name</StyledTableCell>
                     <StyledTableCell align="center">Majors</StyledTableCell>
-                    <StyledTableCell align="center">Meeting Room</StyledTableCell>
                     <StyledTableCell align="center">
-                      Minors
+                      Meeting Room
                     </StyledTableCell>
+                    <StyledTableCell align="center">Minors</StyledTableCell>
                     <StyledTableCell align="center">
                       Certificates
                     </StyledTableCell>
@@ -181,8 +216,8 @@ class Majors extends React.Component {
             </TableContainer>
           </CardContent>
         </Card>
-        </Container> 
-            );
+      </Container>
+    );
   }
 }
 
