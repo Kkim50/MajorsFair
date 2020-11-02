@@ -1,6 +1,6 @@
 {
-  "proxy": "http://0.0.0.0:5000/",
-  "homepage": "http://kimkat.dev/majors-fair",
+  "proxy": "http://34.239.118.208:5000/",
+  "hostname": "http://kimkat.dev/majors-fair",
   "name": "majors-react-app",
   "version": "0.1.0",
   "private": true,

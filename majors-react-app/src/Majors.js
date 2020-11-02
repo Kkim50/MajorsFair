@@ -61,23 +61,26 @@ class Majors extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleUpload = this.handleUpload.bind(this);
+    // this.handleUpload = this.handleUpload.bind(this);
   }
 
   handleChange(event) {
+    console.log("Change!")
     this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("submit");
+    console.log("new submit");
+    this.setState({value: event.target.value});
+    console.log(event.target.value);
     fetch("/api/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        value: this.state.value,
+        value: event.target.value,
         file: this.state.post,
       }),
     })
@@ -89,24 +92,24 @@ class Majors extends React.Component {
       });
   }
 
-  handleUpload(fileObj) {
-    console.log("Uploading");
-    // data.append("name", event.target.fil);
-    console.log(JSON.stringify(fileObj));
+  // handleUpload(fileObj) {
+  //   console.log("Uploading");
+  //   // data.append("name", event.target.fil);
+  //   console.log(JSON.stringify(fileObj));
 
-    fetch("/api/upload/", {
-      method: "POST",
-      headers: {
-        "Content-type": "multipart/form-data",
-      },
-      body: fileObj,
-    })
-      //issue request from fromtend to backend
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ post: data });
-      });
-  }
+  //   fetch("/api/upload/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "multipart/form-data",
+  //     },
+  //     body: fileObj,
+  //   })
+  //     //issue request from fromtend to backend
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       this.setState({ post: data });
+  //     });
+  // }
 
   render() {
     const post = this.state.post;
@@ -171,7 +174,8 @@ class Majors extends React.Component {
                   value={this.state.value}
                   onChange={this.handleSubmit}
                 >
-                  <option selected value="Creative">Creative</option>
+                  <option selected value="N/A">Choose one...</option>
+                  <option value="Creative">Creative</option>
                   <option value="Culture">Culture</option>
                   <option value="Life">Life</option>
                   <option value="Nature">Nature</option>
