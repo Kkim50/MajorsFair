@@ -5,16 +5,13 @@ import re
 import json
 from difflib import SequenceMatcher
 
-
 def print_dict(arg_dict):
     for key, val in arg_dict.items():
         print(key, val)
         print()
 
-
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
-
 
 def find_best_match(majors, category_list, category_names, bad_words):
     matches = {'Creative': [], 'Life': [], 'Leadership': [],
@@ -37,7 +34,7 @@ def find_best_match(majors, category_list, category_names, bad_words):
 
 # initalize directories and lists
 csv_path = "majors_categories.csv"
-xl_file = "MasterList.xlsx"
+xl_file = "masterlist.xlsx"
 df = pd.read_csv(csv_path, sep=',')
 xl = pd.ExcelFile(xl_file)
 
@@ -74,8 +71,8 @@ for row in responses.iterrows():
         re.split("[;/,]", str(row[1][5]))
     minors = re.split("[;/,]", str(row[1][6])) + \
         re.split("[;/,]", str(row[1][7]))
-    certificates = re.split("[,]", str(row[1][8])) + \
-        re.split("[,]", str(row[1][9]))
+    certificates = re.split("[,;/]", str(row[1][8])) + \
+        re.split("[,;/]", str(row[1][9]))
     good_certs = []
     for cert in certificates:
         if cert is None or cert == 'nan':
@@ -84,8 +81,8 @@ for row in responses.iterrows():
         else:
             good_certs.append(cert)
 
-    doubledawgs = re.split("[,]", str(row[1][10])) + \
-        re.split("[,]", str(row[1][11]))
+    doubledawgs = re.split("[,;/]", str(row[1][10])) + \
+        re.split("[,;/]", str(row[1][11]))
     good_dawgs = []
 
     for dawg in doubledawgs:
