@@ -10,7 +10,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 UPLOAD_FOLDER = "./"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
 @app.route('/api/upload/', methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def upload():
