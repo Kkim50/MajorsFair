@@ -20,7 +20,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 #                 print (key,":",value)
 #         return "Error"
 
-
 @app.route('/api/', methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def api_post():

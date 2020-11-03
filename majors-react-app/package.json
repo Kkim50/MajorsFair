@@ -1,5 +1,4 @@
 {
-  "proxy": "http://34.239.118.208:5000/",
   "homepage": "http://kimkat.dev/majors-fair",
   "name": "majors-react-app",
   "version": "0.1.0",
@@ -45,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^1.0.6"
+  },
+  "proxy": "http://3.231.174.85:5000"
 }

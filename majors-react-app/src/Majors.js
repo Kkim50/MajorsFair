@@ -74,7 +74,7 @@ class Majors extends React.Component {
     console.log("new submit");
     this.setState({value: event.target.value});
     console.log(event.target.value);
-    fetch("/api/", {
+    fetch("http://3.231.174.85:5000/api/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
