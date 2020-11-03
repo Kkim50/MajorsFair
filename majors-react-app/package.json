@@ -1,4 +1,5 @@
 {
+  "proxy":"https://majors-fair.herokuapp.com/",
   "homepage": "http://kimkat.dev/majors-fair",
   "name": "majors-react-app",
   "version": "0.1.0",
@@ -10,6 +11,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "cors": "^2.8.5",
     "fontsource-roboto": "^3.0.3",
     "gh-pages": "^3.1.0",
     "material-ui-dropzone": "^3.5.0",
@@ -47,6 +49,5 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^1.0.6"
-  },
-  "proxy": "http://3.231.174.85:5000"
+  }
 }

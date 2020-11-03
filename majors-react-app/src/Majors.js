@@ -65,31 +65,42 @@ class Majors extends React.Component {
   }
 
   handleChange(event) {
-    console.log("Change!")
+    console.log("Change!");
     this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     console.log("new submit");
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
     console.log(event.target.value);
-    fetch("http://3.231.174.85:5000/api/", {
+    fetch("https://majors-fair.herokuapp.com/api/", {
       method: "POST",
+      // mode:"no-cors",
       headers: {
-        "Content-type": "text/plain",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        value: event.target.value,
-        file: this.state.post,
-      }),
+      // body: JSON.stringify({
+      //   value: event.target.value
+      //   // file: this.state.post
+      // }),
     })
       //issue request from fromtend to backend
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        const contentType = response.headers.get('Content-Type');
+        console.log(contentType);
+        return response.json();
+      })
       .then((data) => {
+        console.log("Here!")
         this.setState({ post: data });
         this.setState({ gotmajors_flag: true });
       });
+    console.log("HandleSubmit complete.")
   }
 
   // handleUpload(fileObj) {
@@ -149,10 +160,10 @@ class Majors extends React.Component {
                 Majors Fair Excel Data Parser
               </Typography>
               <Typography variant="caption">
-                Note: The uploading is still a work in progress and isn't implemented.
-                The table populates correctly but may need to be double-checked for accuracy.
-                </Typography>
-{/* 
+                The table populates correctly based on the latest "Masterlist"
+                excelsheet but may need to be double-checked for accuracy.
+              </Typography>
+              {/* 
               <Typography variant="h6">Upload file:</Typography>
               <DropzoneAreaBase height="10%"
                 acceptedFiles={[".xlsx"]}
@@ -165,16 +176,17 @@ class Majors extends React.Component {
                 }}
               >
               </DropzoneAreaBase> */}
-              </div>
-              <div align="center">
-
+            </div>
+            <div align="center">
               <FormControl variant="outlined" action="">
                 <NativeSelect
                   multiple={false}
                   value={this.state.value}
                   onChange={this.handleSubmit}
                 >
-                  <option selected value="N/A">Choose one...</option>
+                  <option selected value="N/A">
+                    Choose one...
+                  </option>
                   <option value="Creative">Creative</option>
                   <option value="Culture">Culture</option>
                   <option value="Life">Life</option>
@@ -190,7 +202,7 @@ class Majors extends React.Component {
                   Please select a category
                 </FormHelperText>
               </FormControl>
-              </div>
+            </div>
 
             <TableContainer component={Paper}>
               <Table

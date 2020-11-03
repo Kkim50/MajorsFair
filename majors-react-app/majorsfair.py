@@ -155,7 +155,7 @@ organized_df = organized_df.rename(columns=inds_to_category)
 jsonfiles = json.loads(organized_df.to_json())
 # print(jsonfiles)
 organized_df.to_json(r'Organized_MasterList.json')
-organized_df.to_excel(r'Organized_MasterList.xlsx')
+organized_df.to_excel(r'Organized_MasterList.xlsx', columns=inds_to_category)
 
 # for word in major.split('-')[0].strip().split(' '):  # Take all the words before the dash -
 #     if word in bad_words: break  # Skip if bad word

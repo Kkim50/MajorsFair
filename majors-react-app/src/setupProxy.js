@@ -3,6 +3,6 @@ const proxy = require('http-proxy-middleware');
 
 module.exports = function(app) {
     app.use(createProxyMiddleware('/api/', { 
-      target: 'http://3.231.174.85:5000'
+      target: 'https://majors-fair.herokuapp.com/'
     }));
   }
