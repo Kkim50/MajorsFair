@@ -77,7 +77,7 @@ class Majors extends React.Component {
     fetch("http://3.231.174.85:5000/api/", {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        "Content-type": "text/plain",
       },
       body: JSON.stringify({
         value: event.target.value,
