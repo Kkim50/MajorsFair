@@ -140,12 +140,12 @@ class Majors extends React.Component {
 
         majors_data.push(
           <TableBody>
-            <TableCell align="right">{name}</TableCell>
-            <TableCell align="right">{majors}</TableCell>
-            <TableCell align="right">{links}</TableCell>
-            <TableCell align="right">{minors}</TableCell>
-            <TableCell align="right">{cats}</TableCell>
-            <TableCell align="right">{dawgs}</TableCell>
+            <TableCell align="right">{name}<br></br></TableCell>
+            <TableCell align="right">{majors}<br></br></TableCell>
+            <TableCell align="right">{links}<br></br></TableCell>
+            <TableCell align="right">{minors}<br></br></TableCell>
+            <TableCell align="right">{cats}<br></br></TableCell>
+            <TableCell align="right">{dawgs}<br></br></TableCell>
           </TableBody>
         );
       }
