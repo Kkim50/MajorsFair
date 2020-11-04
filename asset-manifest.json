@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/majors-fair/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/majors-fair/static/js/main.ca929d4c.chunk.js",
-    "main.js.map": "/majors-fair/static/js/main.ca929d4c.chunk.js.map",
+    "main.js": "/majors-fair/static/js/main.18cd4670.chunk.js",
+    "main.js.map": "/majors-fair/static/js/main.18cd4670.chunk.js.map",
     "runtime-main.js": "/majors-fair/static/js/runtime-main.9ca1bcb5.js",
     "runtime-main.js.map": "/majors-fair/static/js/runtime-main.9ca1bcb5.js.map",
     "static/css/2.f2055dff.chunk.css": "/majors-fair/static/css/2.f2055dff.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.f2055dff.chunk.css",
     "static/js/2.08645ad4.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.ca929d4c.chunk.js"
+    "static/js/main.18cd4670.chunk.js"
   ]
 }
